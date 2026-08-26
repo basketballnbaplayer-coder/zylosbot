@@ -23,7 +23,7 @@ GOOGLE_CLIENT_SECRET = os.getenv("GOOGLE_CLIENT_SECRET")
 ADMIN_USERNAME = os.getenv("ADMIN_USERNAME", "Admin")
 ADMIN_PASSWORD_HASH = generate_password_hash(os.getenv("ADMIN_PASSWORD", "aaaaaaa"))
 
-app = Flask(__name__, template_folder="webapp/templates", static_folder="webapp/static")
+auth_bp = Blueprint("auth", __name__)
 oauth = OAuth()
 
 
