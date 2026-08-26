@@ -16,7 +16,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 from models import init_db, SessionLocal, Channel, ChannelSettings, CustomCommand, BannedWord, LogEntry, Timer, MIN_TIMER_MINUTES  # noqa: E402
 from auth import auth_bp, init_oauth, login_required, admin_required  # noqa: E402
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder="webapp/templates", static_folder="webapp/static")
 app.secret_key = os.getenv("FLASK_SECRET_KEY", "dev-only-change-me")
 app.register_blueprint(auth_bp)
 init_oauth(app)
