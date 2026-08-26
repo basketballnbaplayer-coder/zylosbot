@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ZylosBot</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@480;620&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="landing">
+    <span class="badge">для стримеров Twitch</span>
+    <h1>ZylosBot следит за чатом, пока ты играешь</h1>
+    <p>Команды, стоп-слова и автомодерация — в одной панели. Подключи своего бота за пару минут — вход через свой Twitch-аккаунт.</p>
+    <div class="landing-links">
+      <a href="{{ url_for('auth.login') }}" class="btn btn-primary">Подключить бота на свой канал</a>
+    </div>
+  </div>
+</body>
+</html>
