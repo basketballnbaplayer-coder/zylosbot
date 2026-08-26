@@ -14,7 +14,7 @@ if __name__ == "__main__":
     bot_thread.start()
 
     # Запускаем сам Flask-сайт на порту Render
-    port = int(os.environ.get("PORT", 10000))
+    port = int(os.environ.get("PORT", 1893))
     app.run(host="0.0.0.0", port=port)
 # --------------------------------------------------
 
