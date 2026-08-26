@@ -2,20 +2,17 @@
 Бот для Twitch-чата: команды, модерация, приветствие новых зрителей.
 Многоканальная версия — все данные хранятся в базе данных.
 """
-import threading
-from main import bot # Импортируем твоего бота из main.py
+const express = require('express')
+const app = express()
+const port = process.env.PORT || 9879
 
-def start_twitch_bot():
-    bot.run()
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
 
-if __name__ == "__main__":
-    # Запускаем бота в фоновом режиме, чтобы он не блокировал сайт
-    bot_thread = threading.Thread(target=start_twitch_bot, daemon=True)
-    bot_thread.start()
-
-    # Запускаем сам Flask-сайт на порту Render
-    port = int(os.environ.get("PORT", 1893))
-    app.run(host="0.0.0.0", port=port)
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
 # --------------------------------------------------
 
 from twitchio.ext import commands
