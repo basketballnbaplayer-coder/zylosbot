@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ title }} · ZylosBot</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@480;620&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand"><span class="dot"></span> ZylosBot</div>
+      <nav class="nav">
+        <a href="{{ url_for('dashboard') }}#overview" class="{{ 'active' if active=='dashboard' else '' }}">Обзор</a>
+        <a href="{{ url_for('dashboard') }}#commands">Команды</a>
+        <a href="{{ url_for('dashboard') }}#words">Стоп-слова</a>
+        <a href="{{ url_for('dashboard') }}#filters">Фильтры</a>
+        <a href="{{ url_for('dashboard') }}#timers">Таймеры</a>
+        <a href="{{ url_for('dashboard') }}#activity">Активность</a>
+        <a href="{{ url_for('admin') }}" class="{{ 'active' if active=='admin' else '' }}" style="margin-top:10px;">Супер-админ</a>
+      </nav>
+      <div class="sidebar-foot mono">
+        <a href="{{ url_for('auth.logout') }}" style="color:var(--muted); text-decoration:none;">выйти</a>
+      </div>
+    </aside>
+    <main class="main">
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+</body>
+</html>
