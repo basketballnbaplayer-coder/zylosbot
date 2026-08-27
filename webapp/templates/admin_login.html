@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Вход админа · ZylosBot</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@480;620&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="landing">
+    <span class="badge">супер-админ</span>
+    <h1>Вход в супер-админку</h1>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}<p style="color:var(--coral)">{{ messages[0] }}</p>{% endif %}
+    {% endwith %}
+    <form method="post" style="display:flex; flex-direction:column; gap:10px; width:260px;">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <input type="text" name="username" placeholder="Логин" class="mono"
+        style="background:var(--panel); border:1px solid var(--line); border-radius:8px; color:var(--paper); padding:11px 14px;">
+      <input type="password" name="password" placeholder="Пароль" class="mono"
+        style="background:var(--panel); border:1px solid var(--line); border-radius:8px; color:var(--paper); padding:11px 14px;">
+      <button type="submit" class="btn btn-primary">Войти</button>
+    </form>
+  </div>
+</body>
+</html>

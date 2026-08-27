@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Вход · ZylosBot</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@480;620&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="landing">
+    <span class="badge">вход для стримеров</span>
+    <h1>Войди, чтобы настроить своего бота</h1>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}<p style="color:var(--coral)">{{ messages[0] }}</p>{% endif %}
+    {% endwith %}
+    <div class="landing-links">
+      {% if twitch_ready %}
+      <a href="{{ url_for('auth.login_twitch') }}" class="btn btn-primary">Войти через Twitch</a>
+      {% endif %}
+      {% if google_ready %}
+      <a href="{{ url_for('auth.login_google') }}" class="btn btn-ghost">Войти через Google</a>
+      {% endif %}
+    </div>
+    <p style="font-size:12px;">Вход через Twitch подтверждает, что канал твой. Вход через Google потребует вручную указать канал.</p>
+    <a href="{{ url_for('auth.admin_login') }}" class="mono" style="color:var(--muted); font-size:12px;">Я админ бота →</a>
+  </div>
+</body>
+</html>
