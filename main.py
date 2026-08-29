@@ -54,6 +54,18 @@ class Bot(commands.Bot):
     async def event_ready(self):
         print(f"[OK] Бот запущен как {self.nick}. Каналы: {', '.join(self.channel_logins)}")
 
+        # Без этого self.user_id нигде не появляется, а он нужен в punish()
+        # для параметра moderator_id при вызове timeout_user (Helix API).
+        try:
+            bot_users = await self.fetch_users(names=[self.nick])
+            if bot_users:
+                self.user_id = bot_users[0].id
+                print(f"[OK] ID бота успешно получен: {self.user_id}")
+            else:
+                print("[!] fetch_users вернул пустой список — ID бота не получен")
+        except Exception as e:
+            print(f"[!] Не удалось получить ID бота: {e}")
+
         session = SessionLocal()
         for login in self.channel_logins:
             channel_obj, settings = self.get_channel_data(login)
