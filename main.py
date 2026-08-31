@@ -86,7 +86,7 @@ class Bot(commands.Bot):
 
         # без этого AttributeError вылезет при первом же вызове timeout_user,
         # если fetch_users в event_ready ещё не успел отработать
-        self.user_id = None
+        self.bot_id = None
 
         # анти-рейд: недавние сообщения по каналам и каналы, где сейчас включена защита
         self.recent_messages = {}      # login -> [(timestamp, author, normalized_text), ...]
