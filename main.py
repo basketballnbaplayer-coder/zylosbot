@@ -98,8 +98,8 @@ class Bot(commands.Bot):
         try:
             bot_users = await self.fetch_users(names=[self.nick])
             if bot_users:
-                self.user_id = bot_users[0].id
-                print(f"[OK] ID бота успешно получен: {self.user_id}")
+                self.bot_id = bot_users[0].id
+                print(f"[OK] ID бота успешно получен: {self.bot_id}")
             else:
                 print("[!] fetch_users вернул пустой список — ID бота не получен")
         except Exception as e:
