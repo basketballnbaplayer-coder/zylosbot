@@ -59,6 +59,8 @@ class ChannelSettings(Base):
     caps_threshold = Column(Integer, default=70)   # в процентах
     welcome_enabled = Column(Boolean, default=True)
     welcome_message = Column(Text, default="Привет! Я {bot} 🛡 — защищаю чат от спама, ссылок и капса.")
+    antiraid_enabled = Column(Boolean, default=True)
+    roulette_enabled = Column(Boolean, default=True)
 
     channel = relationship("Channel", back_populates="settings")
 
