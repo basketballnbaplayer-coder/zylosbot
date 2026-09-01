@@ -104,6 +104,27 @@
   </div>
 </div>
 
+<div class="section" id="extensions">
+  <div class="section-head">
+    <h2>Расширения</h2>
+    <span class="hint">дополнительные фичи бота — по умолчанию выключены, включай сам</span>
+  </div>
+  <div class="card">
+    {% for field, name, desc, is_on in extension_toggles %}
+    <form method="post" action="{{ url_for('toggle_setting', field=field) }}" class="toggle-row">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <div>
+        <div class="name">{{ name }}</div>
+        <div class="desc">{{ desc }}</div>
+      </div>
+      <button type="submit" style="background:none; border:none; padding:0; cursor:pointer;">
+        <div class="switch {{ 'on' if is_on else '' }}"><div class="knob"></div></div>
+      </button>
+    </form>
+    {% endfor %}
+  </div>
+</div>
+
 <div class="section" id="timers">
   <div class="section-head">
     <h2>Таймеры</h2>
