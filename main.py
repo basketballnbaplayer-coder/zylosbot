@@ -257,7 +257,8 @@ class Bot(commands.Bot):
             return  # канал не настроен в базе — игнорируем
 
         # анти-рейд: проверяем на волну одинаковых сообщений от разных людей
-        await self.check_raid(message, login)
+        if settings.antiraid_enabled:
+            await self.check_raid(message, login)
 
         # приветствие новых зрителей (Twitch помечает первое сообщение тегом first-msg)
         if settings.welcome_enabled and message.tags.get("first-msg") == "1":
@@ -286,7 +287,7 @@ class Bot(commands.Bot):
             if parts:
                 cmd_name = parts[0].lower()
 
-                if cmd_name == "рулетка":
+                if cmd_name == "рулетка" and settings.roulette_enabled:
                     await self.handle_roulette(message, login)
                     return
 
