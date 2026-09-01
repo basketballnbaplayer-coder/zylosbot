@@ -67,6 +67,10 @@ def dashboard():
         ("caps_filter_enabled", "Капс", f"порог: {settings.caps_threshold}% заглавных букв в сообщении от 10 символов", settings.caps_filter_enabled),
         ("welcome_enabled", "Приветствие новых зрителей", "бот здоровается при первом сообщении в чате", settings.welcome_enabled),
     ]
+    extension_toggles = [
+        ("roulette_enabled", "Рулетка", "команда !рулетка — 1 шанс из 6 получить тайм-аут на 1 минуту, для веселья в чате", settings.roulette_enabled),
+        ("antiraid_enabled", "Анти-рейд", "если 5+ разных зрителей за 10 сек пишут одно и то же — включает «только для фолловеров» на пару минут", settings.antiraid_enabled),
+    ]
     data = dict(
         active="dashboard",
         title="Панель стримера",
@@ -76,6 +80,7 @@ def dashboard():
         global_words=global_words,
         settings=settings,
         toggles=toggles,
+        extension_toggles=extension_toggles,
         timers=timers,
         min_timer_minutes=MIN_TIMER_MINUTES,
         activity=activity,
@@ -143,7 +148,10 @@ def delete_word(word_id):
 @app.route("/dashboard/settings/toggle/<field>", methods=["POST"])
 @login_required
 def toggle_setting(field):
-    allowed = {"caps_filter_enabled", "links_filter_enabled", "words_filter_enabled", "welcome_enabled"}
+    allowed = {
+        "caps_filter_enabled", "links_filter_enabled", "words_filter_enabled", "welcome_enabled",
+        "roulette_enabled", "antiraid_enabled",
+    }
     if field in allowed:
         db = SessionLocal()
         settings = db.query(ChannelSettings).filter_by(channel_id=session["channel_id"]).first()
@@ -151,7 +159,8 @@ def toggle_setting(field):
             setattr(settings, field, not getattr(settings, field))
             db.commit()
         db.close()
-    return redirect(url_for("dashboard") + "#filters")
+    anchor = "extensions" if field in ("roulette_enabled", "antiraid_enabled") else "filters"
+    return redirect(url_for("dashboard") + f"#{anchor}")
 
 
 @app.route("/dashboard/timers/add", methods=["POST"])
